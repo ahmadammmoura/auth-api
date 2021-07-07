@@ -4,7 +4,7 @@ process.env.SECRET = 'toes';
 
 require('@code-fellows/supergoose');
 const middleware = require('../src/middleware/bearer.js');
-const Users = require('../src/models/users.js');
+const Users = require('../src/Models/user.model');
 const jwt = require('jsonwebtoken');
 
 let users = {

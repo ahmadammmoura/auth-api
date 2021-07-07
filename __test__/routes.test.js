@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv').config();
 process.env.SECRET = 'toes';
 
 const server = require('../src/server.js').server;
@@ -16,6 +16,8 @@ let users = {
 describe('Auth Router', () => {
 
   Object.keys(users).forEach(userType => {
+
+    
 
     describe(`${userType} users`, () => {
 
@@ -44,25 +46,31 @@ describe('Auth Router', () => {
 
       });
 
-      it('can signin with bearer', async () => {
+      if(users[userType]==='admin'){
+        it('can signin with bearer', async () => {
 
-        // First, use basic to login to get a token
-
-        const response = await mockRequest.post('/signin')
-          .auth(users[userType].username, users[userType].password);
-
-        // console.log(response.body.token,'sssssssssssssssssssssssss');
-        const token = response.body.token;
-
-        // First, use basic to login to get a token
-        const bearerResponse = await mockRequest
-          .get('/users')
-          .set('Authorization', `Bearer ${token}`);
-
-        // Not checking the value of the response, only that we "got in"
-        expect(bearerResponse.status).toBe(200);
-
-      });
+          // First, use basic to login to get a token
+  
+          const response = await mockRequest.post('/signin')
+            .auth(users[userType].username, users[userType].password);
+  
+          
+          const token = response.body.token;
+  
+          // First, use basic to login to get a token
+          const bearerResponse = await mockRequest
+            .get('/users')
+            .set('Authorization', `Bearer ${token}`);
+  
+          console.log(bearerResponse.body,'sssssssssssssssssssssssss');
+  
+  
+          // Not checking the value of the response, only that we "got in"
+          expect(bearerResponse.status).toBe(200);
+  
+        });
+      }
+      
 
     });
 

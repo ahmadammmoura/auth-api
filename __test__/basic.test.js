@@ -2,7 +2,7 @@
 
 require('@code-fellows/supergoose');
 const middleware = require('../src/middleware/basic.js');
-const Users = require('../src/models/users.js');
+const Users = require('../src/Models/user.model');
 
 let users = {
   admin: { username: 'admin', password: 'password' },
