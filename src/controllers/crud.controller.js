@@ -11,7 +11,7 @@ const paramController = (req, res, next) => {
     req.model = models.get(modelName);
     next();
   } else {
-    const fileName = `${__dirname}/../models/${modelName}/model.js`;
+    const fileName = `${__dirname}/../Models/${modelName}/${modelName}.model.js`;
     if (fs.existsSync(fileName)) {
       const model = require(fileName);
       models.set(modelName, new Collection(model));
